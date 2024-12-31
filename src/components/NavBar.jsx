@@ -1,6 +1,6 @@
 import React from "react";
-import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Heart } from "lucide-react";
 
 const NavBar = () => {
   return (
@@ -8,7 +8,7 @@ const NavBar = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="font-bold text-xl text-green-600">
+            <Link to="/" className="font-bold text-2xl text-green-600">
               Store
             </Link>
           </div>
