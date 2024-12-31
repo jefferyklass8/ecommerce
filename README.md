@@ -29,7 +29,7 @@ This project is an e-commerce store built using React and Vite. It provides user
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/ecommerce.git
+   git clone https://github.com/solarluiso/ecommerce.git
    cd ecommerce
    ```
 2. Install dependencies:
