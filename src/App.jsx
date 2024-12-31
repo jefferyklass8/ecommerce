@@ -10,7 +10,7 @@ function App() {
   return (
     <StoreContextProvider>
       <div className="min-h-screen bg-gray-100">
-        <NavBar></NavBar>
+        <NavBar />
         <main className="max-w-7xl mx-auto py-6">
           <Routes>
             <Route path="/" element={<Home />} />

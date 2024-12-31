@@ -1,23 +1,22 @@
-import { createContext, useEffect, useReducer } from "react";
+import React, { createContext, useEffect, useReducer } from "react";
 
-// context creation
-export const StoreContext = createContext();
-
-import React from "react";
-
+// initial state
 const initialState = {
   products: [],
   loading: true,
 };
 
+// action types
+const SET_LOADING = "SET_LOADING";
+const SET_PRODUCTS = "SET_PRODUCTS";
+const SET_FAVORITES = "SET_FAVORITES";
+
+// reducer
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_LOADING":
-      return {
-        ...state,
-        loading: action.payload,
-      };
-    case "SET_PRODUCTS":
+    case SET_LOADING:
+      return { ...state, loading: action.payload };
+    case SET_PRODUCTS:
       return {
         ...state,
         products: action.payload.map((product) => ({
@@ -25,39 +24,43 @@ const reducer = (state, action) => {
           isFavorite: false,
         })),
       };
-
-    case "SET_FAVORITES": {
-      const favorites = state.products.map((p) => {
-        if (p.id === Number(action.payload)) {
-          p.isFavorite = !p.isFavorite;
-        }
-        return p;
-      });
-
+    case SET_FAVORITES:
       return {
         ...state,
-        products: favorites,
+        products: state.products.map((p) =>
+          p.id === Number(action.payload)
+            ? { ...p, isFavorite: !p.isFavorite }
+            : p
+        ),
       };
-    }
     default:
       return state;
   }
 };
 
-// component that shares the context
+// context creation
+export const StoreContext = createContext({
+  state: initialState,
+  dispatch: () => null,
+});
+
+// context provider component
 const StoreContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    getProducts();
+    fetchProducts();
   }, []);
 
-  const getProducts = async () => {
-    const response = await fetch("https://fakestoreapi.com/products");
-    const data = await response.json();
-
-    dispatch({ type: "SET_PRODUCTS", payload: data });
-    dispatch({ type: "SET_LOADING", payload: false });
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("https://fakestoreapi.com/products");
+      const data = await response.json();
+      dispatch({ type: SET_PRODUCTS, payload: data });
+      dispatch({ type: SET_LOADING, payload: false });
+    } catch (error) {
+      console.error("Failed to fetch products:", error);
+    }
   };
 
   return (
