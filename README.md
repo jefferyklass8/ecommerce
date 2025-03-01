@@ -2,7 +2,7 @@
 
 This project is an e-commerce store built using React and Vite. It provides users with an intuitive interface to browse products, view details, and mark favorites. The application is designed with clean architecture, leveraging React's Context API for state management and Tailwind CSS for styling.
 
-![Demo](https://github.com/solarluiso/ecommerce/blob/main/public/demo.png)
+![Demo](https://github.com/jefferyklass8/ecommerce/blob/main/public/demo.png)
 
 ## Features
 
@@ -31,7 +31,7 @@ This project is an e-commerce store built using React and Vite. It provides user
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/solarluiso/ecommerce.git
+   git clone https://github.com/jefferyklass8/ecommerce.git
    cd ecommerce
    ```
 2. Install dependencies:
